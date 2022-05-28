@@ -1,14 +1,25 @@
-import 'dart:convert';
-import 'dart:async';
+import 'package:cuaca/providers/cuaca_provider.dart';
+import 'package:cuaca/screens/cuaca_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:cuaca/models/cuaca_model.dart';
-import 'package:cuaca/provider/cuaca_providers.dart';
+import 'package:cuaca/providers/cuaca_provider.dart';
 
 void main() {
-  runApp(new MaterialApp(home: new HomePage()));
+  runApp(const MyApp());
 }
 
-class HomePage extends StatefulWidget {
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
   @override
-  HomePageState createState() => new HomePageState();
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<CuacaProvider>(
+          create: (context) => CuacaProvider(),
+        ),
+      ],
+      child: const MaterialApp(
+        home: CuacaScreen(),
+      ),
+    );
+  }
 }
